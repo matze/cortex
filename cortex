@@ -92,15 +92,15 @@ Config = {
 
 if hasattr(str, "format"):
     Config.update({
-        "title-format": u" Cortex -- Reddit/{title}: {total} articles, {new} new",
-        "entry-format-minimal": u" {title} %> {subreddit:<13} | {num_comments:<4}",
-        "entry-format-full": u" {title} %n  [{score:4}] {read} {nsfw} %> {domain:30}   {subreddit:<13}   {num_comments:4} comments",
+        "title-format": " Cortex -- Reddit/{title}: {total} articles, {new} new",
+        "entry-format-minimal": " {title} %> {subreddit:<13} | {num_comments:<4}",
+        "entry-format-full": " {title} %n  [{score:4}] {read} {nsfw} %> {domain:30}   {subreddit:<13}   {num_comments:4} comments",
     })
 else:
     Config.update({
-        "title-format": u" Cortex -- Reddit/%(title)s: %(total)s articles, %(new)s new",
-        "entry-format-minimal": u" %(title)s {>} %(subreddit)-13s | %(num_comments)-4s",
-        "entry-format-full": u" %(title)s {n} [%(score)4s] %(read)s %(nsfw)s {>} %(domain)30s   %(subreddit)-13s   %(num_comments)4s comments",
+        "title-format": " Cortex -- Reddit/%(title)s: %(total)s articles, %(new)s new",
+        "entry-format-minimal": " %(title)s {>} %(subreddit)-13s | %(num_comments)-4s",
+        "entry-format-full": " %(title)s {n} [%(score)4s] %(read)s %(nsfw)s {>} %(domain)30s   %(subreddit)-13s   %(num_comments)4s comments",
     })
 
 Colors = {
