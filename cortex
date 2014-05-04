@@ -380,7 +380,9 @@ class Data(object):
             self.need_update = True
 
             if use_thread:
-                threading.Thread(target=self._load, daemon=True, args=()).start()
+                 t = threading.Thread(target=self._load, args=())
+                 t.daemon = True
+                 t.start()
             else:
                 self._load(False)
 # }}}
