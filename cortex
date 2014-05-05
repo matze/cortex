@@ -337,7 +337,7 @@ class Data(object):
             self.loading = False
             self.need_update = True
 
-            self.error = "Error opening reddit json file at %s. %s [Line %s]." % (self.uri, e, sys.exc_info()[-1])
+            self.error = "Error opening reddit json file at %s. %s [Line %s]." % (self.uri, e, sys.exc_info()[-1].tb_lineno)
             return
 
         for datum in data:
@@ -686,7 +686,7 @@ class Interface(object):
             y += 1
 
         if self.data.error:
-            self.scr.addstr(0, 0, self.data.error.center(width-1))
+            self.scr.addstr(y, 0, self.data.error.center(width-1))
         else:
             self.scr.addstr(y, 0, "Loading...".center(width-1) if self.data.loading else " "*(width-1))
 
