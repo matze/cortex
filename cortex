@@ -585,7 +585,9 @@ class Interface(object):
             if self.need_update or self.data.need_update:
                 self.refresh()
                 self.need_update = self.data.need_update = False
-
+            elif curses.is_term_resized(y,x):
+                self.refresh()
+            y,x = self.scr.getmaxyx()
 
     def quit(self):
         """Quit the interface and application."""
@@ -596,10 +598,13 @@ class Interface(object):
         height, width = self.scr.getmaxyx()
         line = str(line).ljust(width-offset, char)
 
-        if color and color in self.colors:
-            self.scr.addstr(y, x, line, self.colors[color])
-        else:
-            self.scr.addstr(y, x, line)
+        try:
+            if color and color in self.colors:
+                self.scr.addstr(y, x, line, self.colors[color])
+            else:
+                self.scr.addstr(y, x, line)
+        except:
+            pass
 
     def refresh(self):
         """Refresh the curses interface."""
@@ -675,7 +680,7 @@ class Interface(object):
             y += 1
 
         if self.data.error:
-            self.scr.addstr(y, 0, self.data.error.center(width-1))
+            self.scr.addstr(0, 0, self.data.error.center(width-1))
         else:
             self.scr.addstr(y, 0, "Loading...".center(width-1) if self.data.loading else " "*(width-1))
 
