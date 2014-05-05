@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# coding=utf-8
+
 import os
 import sys
 import curses
@@ -11,7 +11,11 @@ from configparser import ConfigParser
 from urllib.request import urlopen
 from urllib.parse import quote
 from threading import Timer
-from subprocess import call, DEVNULL
+
+try:
+	from subprocess import call, DEVNULL
+except ImportError:
+	DEVNULL = open(os.devnull, "wb")
 
 # Get a json library
 try:
@@ -376,7 +380,9 @@ class Data(object):
             self.need_update = True
 
             if use_thread:
-                threading.Thread(target=self._load, daemon=True, args=()).start()
+                 t = threading.Thread(target=self._load, args=())
+                 t.daemon = True
+                 t.start()
             else:
                 self._load(False)
 # }}}
