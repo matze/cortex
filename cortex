@@ -333,7 +333,7 @@ class Data(object):
             self.loading = False
             self.need_update = True
 
-            self.error = "Error opening reddit json file at %s. %s [Line %s]." % (self.uri, e, sys.exc_info()[-1].tb_linenoz)
+            self.error = "Error opening reddit json file at %s. %s [Line %s]." % (self.uri, e, sys.exc_info()[-1])
             return
 
         for datum in data:
