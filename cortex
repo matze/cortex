@@ -686,9 +686,9 @@ class Interface(object):
             y += 1
 
         if self.data.error:
-            self.scr.addstr(y, 0, self.data.error.center(width-1))
+            self.setline(y, 0, self.data.error.center(width-1))
         else:
-            self.scr.addstr(y, 0, "Loading...".center(width-1) if self.data.loading else " "*(width-1))
+            self.setline(y, 0, "Loading...".center(width-1) if self.data.loading else " "*(width-1))
 
         # Refresh the screen
         self.scr.refresh()
@@ -873,8 +873,8 @@ def cm_search(data, interface):
     interface.scr.timeout(-1)
 
     height, width = interface.scr.getmaxyx()
-    interface.scr.addstr(height-1, 0, " "*(width-1))
-    interface.scr.addstr(height-1, 1, "Search: ")
+    interface.setline(height-1, 0, " "*(width-1))
+    interface.setline(height-1, 1, "Search: ")
     sub = interface.scr.getstr(height-1, 9).decode("utf-8")
 
     interface.scr.timeout(GETCH_TIMEOUT)
