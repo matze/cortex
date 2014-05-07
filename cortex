@@ -632,7 +632,7 @@ class Interface(object):
         # Unread messages count
         if Config["inbox"]:
             text = str(self.messages)+" unread messages"
-            self.scr.addstr(0, width-len(text)-1, text, self.colors["messages"])
+            self.setline(0, width-len(text)-1, text, color = "messages")
 
         # Display entries
         y = 1
@@ -846,8 +846,8 @@ def cm_subreddit(data, interface):
     interface.scr.timeout(-1)
 
     height, width = interface.scr.getmaxyx()
-    interface.scr.addstr(height-1, 0, " "*(width-1))
-    interface.scr.addstr(height-1, 1, "Display Subreddit: ")
+    interface.setline(height-1, 0, " "*(width-1))
+    interface.setline(height-1, 1, "Display Subreddit: ")
     sub = interface.scr.getstr(height-1, 20).decode("utf-8")
 
     interface.scr.timeout(GETCH_TIMEOUT)
