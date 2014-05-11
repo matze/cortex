@@ -8,7 +8,7 @@ import time
 import webbrowser
 
 from configparser import ConfigParser
-from urllib.request import urlopen
+from urllib.request import Request, urlopen
 from urllib.parse import quote
 from threading import Timer
 
@@ -86,6 +86,7 @@ COLOR_NAME = {
 Config = {
     "browser-command": "",
     "update-interval": 10,
+    "user-agent": "",
     "seen-size": 500,
     "sort": "-read",
 
@@ -304,8 +305,13 @@ def seen_write():
 # {{{ check_inbox
 def check_inbox(interface):
     try:
-        req = urlopen(Config["inbox"]).read().decode("utf-8")
-        data = json.loads(req)["data"]["children"]
+        req = Request(Config["inbox"])
+        ua = Config.get("user-agent", None)
+        if ua:
+            req.add_header('User-agent', ua)
+
+        resp = urlopen(req).read().decode("utf-8")
+        data = json.loads(resp)["data"]["children"]
         interface.messages = len(data)
     except:
         pass
@@ -330,8 +336,13 @@ class Data(object):
 
     def _load(self, use_thread=True):
         try:
-            req = urlopen(self.uri).read().decode("utf-8")
-            data = json.loads(req)["data"]["children"]
+            req = Request(self.uri)
+            ua = Config.get("user-agent", None)
+            if ua:
+                req.add_header('User-agent', ua)
+
+            resp = urlopen(self.uri).read().decode("utf-8")
+            data = json.loads(resp)["data"]["children"]
             self.error = ""
         except Exception as e:
             self.loading = False
