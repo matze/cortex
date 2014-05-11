@@ -32,6 +32,8 @@
 ##minimal=0
 ###Whether to hide old links on start.
 ##hideold=0
+##What useragent to use when requesting the JSON pages
+#user-agent=Cortex for /u/{username}
 
 [color]
 ## Item=Foreground,Background
