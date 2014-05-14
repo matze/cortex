@@ -337,9 +337,9 @@ class Data(object):
     def _load(self, use_thread=True):
         try:
             req = Request(self.uri)
-            ua = Config.get("user-agent", None)
-            if ua:
-                req.add_header('User-agent', ua)
+            ua = Config.get("user-agent", "{} - {}".format(
+                APPLICATION_NAME, APPLICATION_VERSION)
+            req.add_header('User-agent', ua)
 
             resp = urlopen(self.uri).read().decode("utf-8")
             data = json.loads(resp)["data"]["children"]
