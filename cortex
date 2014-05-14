@@ -307,7 +307,7 @@ def check_inbox(interface):
     try:
         req = Request(Config["inbox"])
         ua = Config.get("user-agent", "{} - {}".format(
-            APPLICATION_NAME, APPLICATION_VERSION)
+            APPLICATION_NAME, APPLICATION_VERSION))
         req.add_header('User-agent', ua)
 
         resp = urlopen(req).read().decode("utf-8")
@@ -338,7 +338,7 @@ class Data(object):
         try:
             req = Request(self.uri)
             ua = Config.get("user-agent", "{} - {}".format(
-                APPLICATION_NAME, APPLICATION_VERSION)
+                APPLICATION_NAME, APPLICATION_VERSION))
             req.add_header('User-agent', ua)
 
             resp = urlopen(req).read().decode("utf-8")
