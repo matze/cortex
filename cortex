@@ -341,7 +341,7 @@ class Data(object):
                 APPLICATION_NAME, APPLICATION_VERSION)
             req.add_header('User-agent', ua)
 
-            resp = urlopen(self.uri).read().decode("utf-8")
+            resp = urlopen(req).read().decode("utf-8")
             data = json.loads(resp)["data"]["children"]
             self.error = ""
         except Exception as e:
