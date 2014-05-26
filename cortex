@@ -270,8 +270,12 @@ def browseropen(uri):
             call(cmd, shell=True, stdout=DEVNULL, stderr=DEVNULL)
         else:
             # Taken from webbrowser source since stderr is displayed using regular browser
-            cmdline = webbrowser.get().name + " " + uri
-            call( cmdline, shell=True, stdout=DEVNULL, stderr=DEVNULL)
+            browser = webbrowser.get()
+            if hasattr(browser, 'name'):
+                cmdline = browser.name + " " + uri
+                call( cmdline, shell=True, stdout=DEVNULL, stderr=DEVNULL)
+            else:
+                webbrowser.open(uri)
     else:
         if Config["browser-command"]:
             if "{0}" in Config["browser-command"]:
