@@ -267,7 +267,9 @@ def browseropen(uri):
                 cmd = Config["browser-command"]+" "+uri
             if BackgroundBrowser:
                 cmd += " &"
-            call(cmd, shell=True, stdout=DEVNULL, stderr=DEVNULL)
+                call(cmd, shell=True, stdout=DEVNULL, stderr=DEVNULL)
+            else:
+                call(cmd, shell=True)
         else:
             # Taken from webbrowser source since stderr is displayed using regular browser
             browser = webbrowser.get()
@@ -286,7 +288,9 @@ def browseropen(uri):
                 cmd = "("+" ; ".join([Config["browser-command"]+" "+u for u in uri])+")"
             if BackgroundBrowser:
                 cmd += " &"
-            call(cmd, shell=True, stdout=DEVNULL, stderr=DEVNULL)
+                call(cmd, shell=True, stdout=DEVNULL, stderr=DEVNULL)
+            else:
+                call(cmd, shell=True)
         else:
             for u in uri:
                 # Taken from webbrowser source since stderr is displayed using regular browser
