@@ -171,6 +171,7 @@ Binds = {
 Minimal = False
 HideOld = False
 BackgroundBrowser = True
+UseHTTPS = False
 
 # Load user config
 LocalConfig = ConfigParser(interpolation=None)
@@ -186,6 +187,8 @@ if LocalConfig.has_section("config"):
             HideOld = bool(int(Config[opt]))
         elif opt == "browser-background":
             BackgroundBrowser = bool(int(Config[opt]))
+        elif opt == "https":
+            UseHTTPS = bool(int(Config[opt]))
 
 if LocalConfig.has_section("color"):
     for cname in LocalConfig.options("color"):
@@ -194,6 +197,12 @@ if LocalConfig.has_section("color"):
             Colors[cname] = col
         else:
             Colors[cname] = col[0], Colors["normal"][1]
+
+if UseHTTPS:
+    BASE_URI = "https://pay.reddit.com/"
+    INBOX_URI = BASE_URI + "message/inbox"
+    SUB_URI = BASE_URI + "r/%s/"
+    SEARCH_URI = BASE_URI + "search.json?q=%s&sort=new"
 
 # Load seen cache
 Seen = []
@@ -478,6 +487,8 @@ class Entry(object):
     def open(self):
         """Open entry link in browser."""
         if "url" in self.data:
+            if UseHTTPS:
+                self.data["url"] = self.data["url"].replace("http:", "https:")
             browseropen(self.data["url"])
             self.read = True
             self.data["read"] = "    "

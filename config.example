@@ -34,6 +34,8 @@
 ##hideold=0
 ##What useragent to use when requesting the JSON pages
 #user-agent=Cortex for /u/{username}
+##Whether to use http. Make sure to use https://pay.reddit.com in frontpage url too.
+#https=0
 
 [color]
 ## Item=Foreground,Background
